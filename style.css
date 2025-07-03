@@ -141,6 +141,24 @@ textarea {
     display: block;
 }
 
+.admin-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #073653;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    z-index: 100;
+}
+
+.admin-btn:hover {
+    background-color: #0a4a7a;
+}
+
 .error-container h3 {
     color: #d32f2f;
     margin-bottom: 10px;
