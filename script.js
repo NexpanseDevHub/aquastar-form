@@ -84,7 +84,35 @@ document.addEventListener('DOMContentLoaded', function() {
     const formData = new FormData(form);
     const responseData = {};
     
-    // ... (resto do código de processamento que você já tinha) ...
+    // Se não houver erros, processar o envio
+const formData = new FormData(form);
+const responseData = {};
+
+// Processar cada questão (1-6)
+for (let i = 1; i <= 6; i++) {
+    const checkboxes = form.querySelectorAll(`input[name="q${i}"]:checked`);
+    responseData[`question${i}`] = Array.from(checkboxes).map(cb => cb.value);
+
+    // Processar campo "Outros" se existir
+    const otherInput = form.querySelector(`input[name="q${i}_other"]`);
+    if (
+        otherInput &&
+        otherInput.value.trim() !== '' &&
+        responseData[`question${i}`].includes('Outros')
+    ) {
+        responseData[`question${i}`].push(`Outros: ${otherInput.value.trim()}`);
+    }
+}
+
+// Processar comentários
+responseData.comments = formData.get('comments');
+
+// Adicionar timestamp
+responseData.timestamp = new Date().toISOString();
+
+// Armazenar no localStorage
+responses.push(responseData);
+localStorage.setItem('aquastarResponses', JSON.stringify(responses));
     
     // Mostrar mensagem de sucesso
     successMessage.style.display = 'block';
