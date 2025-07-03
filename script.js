@@ -16,43 +16,63 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Form submission
     form.addEventListener('submit', function(e) {
-        e.preventDefault();
+    e.preventDefault();
+    
+    // Reset error states
+    document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
+    document.querySelectorAll('.checkbox-group').forEach(el => el.classList.remove('error'));
+    
+    let isValid = true;
+    
+    // Validar cada questão (1-6)
+    for (let i = 1; i <= 6; i++) {
+        const checkboxes = form.querySelectorAll(`input[name="q${i}"]:checked`);
+        const otherInput = form.querySelector(`input[name="q${i}_other"]`);
         
-        // Get all form data
-        const formData = new FormData(form);
-        const responseData = {};
-        
-        // Process checkboxes
-        for (let i = 1; i <= 6; i++) {
-            const checkboxes = form.querySelectorAll(`input[name="q${i}"]:checked`);
-            responseData[`question${i}`] = Array.from(checkboxes).map(cb => cb.value);
+        if (checkboxes.length === 0 || 
+            (Array.from(checkboxes).some(cb => cb.value === "Outros") && (!otherInput || otherInput.value.trim() === '')) {
             
-            // Process "other" text
-            const otherInput = form.querySelector(`input[name="q${i}_other"]`);
-            if (otherInput && otherInput.value.trim() !== '') {
-                responseData[`question${i}`].push(`Outros: ${otherInput.value.trim()}`);
+            // Mostrar erro
+            const questionDiv = document.querySelector(`input[name="q${i}"]`).closest('.form-section');
+            let errorMsg = questionDiv.querySelector('.error-message');
+            
+            if (!errorMsg) {
+                errorMsg = document.createElement('p');
+                errorMsg.className = 'error-message';
+                questionDiv.querySelector('.checkbox-group').after(errorMsg);
             }
+            
+            errorMsg.textContent = 'Por favor, selecione pelo menos uma opção';
+            errorMsg.style.display = 'block';
+            questionDiv.querySelector('.checkbox-group').classList.add('error');
+            
+            isValid = false;
         }
-        
-        // Process comments
-        responseData.comments = formData.get('comments');
-        
-        // Add timestamp
-        responseData.timestamp = new Date().toISOString();
-        
-        // Save response
-        responses.push(responseData);
-        localStorage.setItem('aquastarResponses', JSON.stringify(responses));
-        
-        // Show success message
-        successMessage.style.display = 'block';
-        form.reset();
-        
-        // Hide success message after 5 seconds
-        setTimeout(() => {
-            successMessage.style.display = 'none';
-        }, 5000);
-    });
+    }
+    
+    if (!isValid) {
+        // Rolar até o primeiro erro
+        const firstError = document.querySelector('.error');
+        if (firstError) {
+            firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        return;
+    }
+    
+    // Processar envio se tudo estiver válido
+    const formData = new FormData(form);
+    const responseData = {};
+    
+    // ... (resto do código de processamento que você já tinha) ...
+    
+    // Mostrar mensagem de sucesso
+    successMessage.style.display = 'block';
+    form.reset();
+    
+    setTimeout(() => {
+        successMessage.style.display = 'none';
+    }, 5000);
+});
 
     // Admin access
     adminAccessBtn.addEventListener('click', function() {
