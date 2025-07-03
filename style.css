@@ -95,6 +95,36 @@ form {
     color: #FFFFFF;
 }
 
+/* Estilos para mensagens de erro */
+.error-container {
+    background-color: #ffebee;
+    border-left: 4px solid #ff4444;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    display: none; /* Inicialmente escondido */
+}
+
+.error-container.show {
+    display: block;
+}
+
+.error-container h3 {
+    color: #ff4444;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.error-list {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.error-list li {
+    margin-bottom: 5px;
+    color: #d32f2f;
+}
+
 textarea {
     width: 100%;
     padding: 12px;
