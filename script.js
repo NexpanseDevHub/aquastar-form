@@ -18,21 +18,30 @@ document.addEventListener('DOMContentLoaded', function() {
     form.addEventListener('submit', function(e) {
     e.preventDefault();
     
-    // Reset error states
+    // Resetar erros anteriores
     document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
     document.querySelectorAll('.checkbox-group').forEach(el => el.classList.remove('error'));
+    document.getElementById('errorContainer').classList.remove('show');
     
-    let isValid = true;
+    const errorList = document.getElementById('errorList');
+    errorList.innerHTML = '';
+    const errors = [];
     
     // Validar cada questão (1-6)
     for (let i = 1; i <= 6; i++) {
         const checkboxes = form.querySelectorAll(`input[name="q${i}"]:checked`);
         const otherInput = form.querySelector(`input[name="q${i}_other"]`);
+        let hasError = false;
         
-        if (checkboxes.length === 0 || 
-            (Array.from(checkboxes).some(cb => cb.value === "Outros") && (!otherInput || otherInput.value.trim() === '')) {
-            
-            // Mostrar erro
+        if (checkboxes.length === 0) {
+            errors.push(`Pergunta ${i}: Selecione pelo menos uma opção`);
+            hasError = true;
+        } else if (Array.from(checkboxes).some(cb => cb.value === "Outros") && (!otherInput || otherInput.value.trim() === '')) {
+            errors.push(`Pergunta ${i}: O campo "Outros" deve ser preenchido`);
+            hasError = true;
+        }
+        
+        if (hasError) {
             const questionDiv = document.querySelector(`input[name="q${i}"]`).closest('.form-section');
             let errorMsg = questionDiv.querySelector('.error-message');
             
@@ -42,24 +51,36 @@ document.addEventListener('DOMContentLoaded', function() {
                 questionDiv.querySelector('.checkbox-group').after(errorMsg);
             }
             
-            errorMsg.textContent = 'Por favor, selecione pelo menos uma opção';
+            errorMsg.textContent = 'Campo obrigatório';
             errorMsg.style.display = 'block';
             questionDiv.querySelector('.checkbox-group').classList.add('error');
-            
-            isValid = false;
         }
     }
     
-    if (!isValid) {
-        // Rolar até o primeiro erro
-        const firstError = document.querySelector('.error');
-        if (firstError) {
-            firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
+    // Validar campo de comentários (se quiser tornar obrigatório)
+    const comments = form.querySelector('textarea[name="comments"]');
+    if (comments.value.trim() === '') {
+        errors.push('Comentários: Este campo é obrigatório');
+        comments.classList.add('error');
+    }
+    
+    // Mostrar erros se existirem
+    if (errors.length > 0) {
+        const errorContainer = document.getElementById('errorContainer');
+        errorContainer.classList.add('show');
+        
+        errors.forEach(error => {
+            const li = document.createElement('li');
+            li.textContent = error;
+            errorList.appendChild(li);
+        });
+        
+        // Rolar até o topo dos erros
+        errorContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
         return;
     }
     
-    // Processar envio se tudo estiver válido
+    // Se não houver erros, processar o envio
     const formData = new FormData(form);
     const responseData = {};
     
