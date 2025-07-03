@@ -1,4 +1,4 @@
-/* Global Styles */
+/* Estilos Gerais */
 * {
     margin: 0;
     padding: 0;
@@ -24,8 +24,8 @@ header {
 }
 
 .logo {
-    max-width: 150px;
-    margin-bottom: 25px;
+    max-width: 250px;
+    margin-bottom: 20px;
 }
 
 h1 {
@@ -46,11 +46,15 @@ h2 {
     margin-bottom: 15px;
 }
 
-/* Form Styles */
+.required-field {
+    color: #ff4444;
+}
+
+/* Formulário */
 form {
     background-color: #1d1d1d;
     padding: 30px;
-    border-radius: 20px;
+    border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
@@ -95,36 +99,6 @@ form {
     color: #FFFFFF;
 }
 
-/* Estilos para mensagens de erro */
-.error-container {
-    background-color: #ffebee;
-    border-left: 4px solid #ff4444;
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 4px;
-    display: none; /* Inicialmente escondido */
-}
-
-.error-container.show {
-    display: block;
-}
-
-.error-container h3 {
-    color: #ff4444;
-    margin-bottom: 10px;
-    font-size: 18px;
-}
-
-.error-list {
-    list-style-type: disc;
-    padding-left: 20px;
-}
-
-.error-list li {
-    margin-bottom: 5px;
-    color: #d32f2f;
-}
-
 textarea {
     width: 100%;
     padding: 12px;
@@ -153,114 +127,34 @@ textarea {
     background-color: #e6e6e6;
 }
 
-/* Footer */
-footer {
-    text-align: center;
-    margin-top: 40px;
-    padding: 20px;
-    color: #1d1d1d;
-    position: relative;
-}
-
-.admin-btn {
-    position: absolute;
-    right: 20px;
-    bottom: 20px;
-    background-color: #073653;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-/* Modal Styles */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.7);
-}
-
-.modal-content {
-    background-color: #1d1d1d;
-    margin: 10% auto;
-    padding: 30px;
-    border-radius: 8px;
-    max-width: 600px;
-    color: #FFFFFF;
-    position: relative;
-}
-
-.close {
-    color: #FFFFFF;
-    position: absolute;
-    right: 20px;
-    top: 10px;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.modal-content input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin: 15px 0;
-    background-color: #2d2d2d;
-    border: 1px solid #333;
-    color: #FFFFFF;
-    border-radius: 4px;
-}
-
-.modal-content button {
-    background-color: #FFFFFF;
-    color: #073653;
-    border: none;
-    padding: 10px 20px;
-    font-weight: bold;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-right: 10px;
-}
-
-#responsesContainer {
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 1px solid #333;
-}
-
-#responsesList {
-    max-height: 400px;
-    overflow-y: auto;
+/* Mensagens de Erro */
+.error-container {
+    background-color: #ffebee;
+    border-left: 4px solid #ff4444;
+    padding: 15px;
     margin-bottom: 20px;
-    padding: 10px;
-    background-color: #2d2d2d;
     border-radius: 4px;
-}
-
-/* Success Message */
-.success-message {
     display: none;
-    background-color: #4CAF50;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    border-radius: 8px;
-    margin-top: 20px;
 }
 
-.required-field {
-    color: #ff4444;
+.error-container.show {
+    display: block;
+}
+
+.error-container h3 {
+    color: #d32f2f;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.error-list {
+    list-style-type: disc;
+    padding-left: 20px;
+    color: #d32f2f;
 }
 
 .error-message {
-    color: #ff4444;
+    color: #d32f2f;
     font-size: 14px;
     margin-top: 5px;
     display: none;
@@ -271,7 +165,18 @@ footer {
     padding-left: 10px;
 }
 
-/* Responsive Design */
+/* Mensagem de Sucesso */
+.success-message {
+    display: none;
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+/* Responsivo */
 @media (max-width: 768px) {
     .container {
         padding: 10px;
@@ -281,17 +186,7 @@ footer {
         padding: 20px;
     }
     
-    .modal-content {
-        margin: 20% auto;
-        width: 90%;
-    }
-    
-    footer {
-        padding-bottom: 60px;
-    }
-    
-    .admin-btn {
-        position: static;
-        margin-top: 20px;
+    .checkbox-group label {
+        font-size: 14px;
     }
 }
