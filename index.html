@@ -164,16 +164,33 @@
             <button type="submit" class="submit-btn">Enviar Respostas</button>
         </form>
 
-        <!-- Success Message -->
-        <div id="successMessage" class="success-message">
-            <p>Obrigado por responder nosso formulário! Suas respostas foram registradas com sucesso.</p>
+       <!-- Admin Access Modal -->
+<div id="adminModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Acesso Administrativo</h2>
+        <p>Digite a senha para visualizar as respostas:</p>
+        <input type="password" id="adminPassword" placeholder="Senha">
+        <button id="viewResponsesBtn">Visualizar Respostas</button>
+        <div id="responsesContainer" style="display: none;">
+            <h3>Respostas Armazenadas</h3>
+            <div id="responsesList"></div>
+            <button id="exportCSVBtn">Exportar para CSV</button>
+            <button id="clearResponsesBtn">Limpar Todas as Respostas</button>
         </div>
     </div>
+</div>
 
+<!-- Success Message -->
+<div id="successMessage" class="success-message">
+    <p>Obrigado por responder nosso formulário! Suas respostas foram registradas com sucesso.</p>
+</div>
+
+<script src="script.js"></script>
     <footer>
         <p>© 2025 Aquastar - Todos os direitos reservados</p>
     </footer>
-
+    
     <script src="script.js"></script>
 </body>
 </html>
