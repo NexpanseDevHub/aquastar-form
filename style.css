@@ -176,6 +176,96 @@ textarea {
     margin-top: 20px;
 }
 
+/* Modal de Administração */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7);
+}
+
+.modal-content {
+    background-color: #1d1d1d;
+    margin: 10% auto;
+    padding: 30px;
+    border-radius: 8px;
+    max-width: 600px;
+    color: #FFFFFF;
+    position: relative;
+}
+
+.close {
+    color: #FFFFFF;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.modal-content input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 15px 0;
+    background-color: #2d2d2d;
+    border: 1px solid #333;
+    color: #FFFFFF;
+    border-radius: 4px;
+}
+
+.modal-content button {
+    background-color: #FFFFFF;
+    color: #073653;
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+#responsesContainer {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #333;
+}
+
+#responsesList {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #2d2d2d;
+    border-radius: 4px;
+}
+
+.response-item {
+    background-color: #2d2d2d;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+
+.admin-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #073653;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    z-index: 100;
+}
+
 /* Responsivo */
 @media (max-width: 768px) {
     .container {
