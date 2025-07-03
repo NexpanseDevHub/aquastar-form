@@ -160,5 +160,18 @@ document.addEventListener('DOMContentLoaded', function() {
             responses = [];
             responsesList.innerHTML = '<p>Nenhuma resposta encontrada.</p>';
         }
+    }); // <-- Esta chave estava faltando
+
+    // Auto-check "Outros" quando o campo é preenchido
+    document.querySelectorAll('[name$="_other"]').forEach(otherInput => {
+        otherInput.addEventListener('input', function() {
+            if (this.value.trim() !== '') {
+                // Encontra o checkbox "Outros" correspondente
+                const correspondingCheckbox = this.previousElementSibling;
+                if (correspondingCheckbox && correspondingCheckbox.type === 'checkbox') {
+                    correspondingCheckbox.checked = true;
+                }
+            }
+        });
     });
 });
